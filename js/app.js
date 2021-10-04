@@ -1,64 +1,77 @@
 //Variables
-const courses = document.querySelector('#courses-list'),
+ const courses = document.querySelector('#courses-list'),
        shoppingCartContent = document.querySelector('#cart-content tbody');
- 
-       
 
-//Event Listener
+
+
+//Event Listeners
+
 loadEventListeners();
 
 function loadEventListeners() {
-    //when a new course is added
+    //When a new course is added
+
     courses.addEventListener('click', buyCourse);
+
+
 }
 
 
+
 //Function
+
 function buyCourse(e) {
     e.preventDefault();
-    //use delegation to find the course that was added
+    
+    //Use delegation to find the course that was added
     if(e.target.classList.contains('add-to-cart')) {
-        //read the course values
-        const courses = e.target.parentElement.parentElement;
+        //Read the course values
+        const course = e.target.parentElement.parentElement;
 
         //read the values
         getCourseInfo(course);
     }
 
 }
-//Read the HTML Information of the selected course
+
+//Read the Html information of the selected course
 function getCourseInfo(course) {
-    //create an object with course data
+    //Create an object with course data
     const courseInfo = {
         image: course.querySelector('img').src,
         title: course.querySelector('h4').textContent,
         price: course.querySelector('.price span').textContent,
         id: course.querySelector('a').getAttribute('data-id')
     }
+    //console.log(courseInfo);
     //Insert into the shopping cart
     addIntoCart(courseInfo);
 }
 //Display the selected course into the shopping cart
+
 function addIntoCart(course) {
-    //Create a tr
+    // create a tr
     const row = document.createElement('tr');
 
     //Build the template
-    row.InnerHTML = `
-            <tr>
-                <td>
-                     <img src="${course.image} witdh=100>
-                </td>
-                <td>${course.title}</td>
-                <td>${course.price}</td>
-                <td>
-                   <a href="#" class="remove" data-id="${course.id}">X</a>
-                </td>
+    row.innerHTML = `
+             <tr>
+                 <td>
+                     <img src="${course.image}" width=100>
+                 </td>
+                 <td>${course.title}</td>
+                 <td>${course.price}</td>
+                 <td>
+                    <a href="#" class="remove" data-id="${course.id}">X</a>
+                 </td>
 
 
-            </tr>
-
+             </tr>
+    
     `;
-    //Add into the shopping cart
+    //Add into the shopping cart 
     shoppingCartContent.appendChild(row);
 }
+
+
+
