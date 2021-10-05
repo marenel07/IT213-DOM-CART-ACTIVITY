@@ -129,6 +129,13 @@ function clearCart() {
 
     }
 
+    //Clear from local storage
+    clearLocalStorage();
+
+}
+//Clears the whole local storage
+function clearLocalStorage() {
+    localStorage.clear();
 }
 
 //Loads when document is ready and print courses into shopping cart
